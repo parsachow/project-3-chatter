@@ -27,7 +27,7 @@ app.use(require("./config/auth"));
 // api routes must be before the "catch all" route
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postsRoutes);
-app.use("/api/", likesRoutes);
+app.use("/api", likesRoutes);
 
 
 
