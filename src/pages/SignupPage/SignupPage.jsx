@@ -14,9 +14,9 @@ import {
   } from "semantic-ui-react";
 
 
- 
+//--------------------------------------------  
 
-export default function SignupPage(){
+export default function SignupPage({handleSignupLogin}){
 
     const [state, setState] = useState({
         username: '',
@@ -30,6 +30,11 @@ export default function SignupPage(){
 
     const [selectedFile, setSelectedFile] = useState('')
 
+	const navigate = useNavigate()
+
+
+//--------------------------------------------
+
     function handleChange(e){
         setState({
             ...state,
@@ -41,10 +46,31 @@ export default function SignupPage(){
         setSelectedFile(e.target.files[0])
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
 
-        //createing fornData as we are sending a file to the server.
+        //createing formData as we are sending a file to the server. http request will thus be send in 2 parts, the text and the file.
+        const formData = new FormData();
+
+        formData.append('photo', selectedFile);
+        formData.append('username', state.username);
+        formData.append('email', state.email);
+        formData.append('password', state.password);
+        formData.append('bio', state.bio);
+
+
+        try{
+            const signUp = await userService.signup(formData)
+			console.log(signUp)
+			
+            handleSignupLogin();
+            // navigate the user to the home page
+			navigate('/');
+        }catch(err){
+            console.log(err, 'err in handleSubmit');
+			setError('Check your terminal for your error and the chrome console!')
+        }
+
     }
 
     return(
@@ -91,7 +117,7 @@ export default function SignupPage(){
 					 required
 				   />
 				   <Form.TextArea
-					 label="bio"
+					 label="Bio"
 					 name="bio"
 					 placeholder="Tell us about yourself"
 					 value={state.bio}
