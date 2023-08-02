@@ -1,24 +1,56 @@
 import { Segment, Form, Button, Image } from "semantic-ui-react";
+import { useState } from "react";
+
+export default function AddPostForm({user, handleAddPost}){
+
+    const [state, setState] = useState({
+        caption:''
+    })
+
+    const [selectedFile, setSelectedFile] = useState('')
 
 
-export default function AddPostForm(){
+    function handleFileInput(e){
+        setSelectedFile(e.target.files[0])
+    }
+
+
+    function handleChange(e){
+        setState({
+        ...state,
+        [e.target.name]: e.target.value
+    })
+  }
+
+
+    function handleSubmit(e) {
+        // Since we are sendinga file, prepare the object as formData to send to the server
+        const formData = new FormData()
+        formData.append('caption', state.caption)
+        formData.append('photo', selectedFile)
+        
+        // call handleAddPost from HomePage, which calls our postsApi.create function in the utils folder
+        handleAddPost(formData)
+    }
+
     return(
+    <Segment >
+        <Form autoComplete="off" onSubmit={handleSubmit}>
         <Segment>
-        <h4>post form</h4>
-        <Form>
         <Image
-        floated="left"
         avatar
         src={
-        post.user.photoUrl
-         ? post.user.photoUrl
+        user.photoUrl
+         ? user.photoUrl
          : "https://react.semantic-ui.com/images/wireframe/square-image.png"
         }
         />
+        </Segment>
         <Form.TextArea placeholder="What's happening?!"
         className="form-control"
         name="caption"
         value={state.caption}
+        onChange={handleChange}
         required
          />
         <Form.Input
@@ -32,6 +64,6 @@ export default function AddPostForm(){
         Post
         </Button>
         </Form>
-        </Segment>
+    </Segment>
     )
 }

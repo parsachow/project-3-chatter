@@ -7,36 +7,50 @@ import {
     Sidebar,
   } from 'semantic-ui-react'
 
-export default function SideBar(){
+export default function SideBar({user, handleLogout}){
     return(
-        <Grid columns={1}>
-      <Grid.Column>
+    <Grid columns={1}>
+        <Grid.Column>
           <Sidebar
             as={Menu}
-            animation='overlay'
+            animation='uncover'
             icon='labeled'
             inverted
             vertical
-            visible="true"
+            visible={true}
             width='thin'>
-            <Menu.Item as='a'>
-              <Icon name='home' />
-              Home
+            
+            <Menu.Item>
+                <Link to={`/${user?.username}`}>
+                <Icon name='user' /> Profile
+                </Link>
             </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='bell' />
-              Notifications
+            <Menu.Item >
+                <Link to="/">
+                <Icon name='home' />
+                    Home
+                </Link>
             </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='mail' />
-              Messages
+            <Menu.Item>
+                <Link>
+                <Icon name='bell' />
+                Notifications
+                </Link>
             </Menu.Item>
-            <Menu.Item as='a'>
+            <Menu.Item>
+                <Link>
+                <Icon name='mail' />
+                Messages
+                </Link>
+            </Menu.Item>
+            <Menu.Item>
+            <Link to="/login" onClick={handleLogout}>
               <Icon name='unlock' />
-              Logoout
+              Logout
+            </Link>
             </Menu.Item>
           </Sidebar>
-      </Grid.Column>
+        </Grid.Column>
     </Grid>
          
     )
