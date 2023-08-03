@@ -39,7 +39,7 @@ async function create(req, res) {
         console.log("===========================================");
         res.status(400).json({ error: "Error from aws, check your terminal!" });
       }
-      
+
       try {
         // Use our Model to create a document in the posts collection in Mongodb
         const post = await Post.create({
@@ -49,12 +49,15 @@ async function create(req, res) {
         });
         await post.populate("user"); // populating on a mongoose document! this gives us the user object
         // this response will show up in the feedPage in   const responseData = await postsApi.create(post);
-        res.status(201).json({ data: post }); // <- this is what responseData should be
+        console.log('201 post', post )
+        return res.status(201).json({ data: post }); // <- this is what responseData should be
       } catch (err) {
-        res.status(400).json({ error: err });
+        console.log()
+        return res.status(400).json({ error: err });
       }
     });
   }
+  else{
   try {
     // Use our Model to create a document in the posts collection in Mongodb
     const post = await Post.create({
@@ -64,11 +67,11 @@ async function create(req, res) {
     });
     await post.populate("user"); // populating on a mongoose document! this gives us the user object
     // this response will show up in the HomePage in  const responseData = await postsApi.create(post);
-    res.status(201).json({ data: post }); // <- this is what responseData should be
+    return res.status(201).json({ data: post }); // <- this is what responseData should be
   } catch (err) {
-    res.status(400).json({ error: err });
+    return res.status(400).json({ error: err });
   }
-  }
+  }}
 
 
   async function index(req, res) {

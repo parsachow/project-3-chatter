@@ -12,7 +12,7 @@ export default function PostGallery({ posts, user }){
 
     return(
         
-        <Card.Group>
+        <Card.Group itemsPerRow={1}>
             {postCards}
         </Card.Group>
     )

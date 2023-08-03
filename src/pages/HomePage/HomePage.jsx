@@ -31,37 +31,37 @@ export default function HomePage({user, handleLogout}){
     
   }
 
-  // async function getAllPosts(){
-  //   try{
-  //     const responsefromServer = await postApi.getAllPosts();
-  //     // this is the getAllPosts function from post utils
-  //     console.log(responsefromServer);
-  //     setPosts(responsefromServer.posts)
+  async function getAllPosts(){
+    try{
+      const responsefromServer = await postApi.getAllPosts();
+      // this is the getAllPosts function from post utils
+      console.log(responsefromServer);
+      setPosts(responsefromServer.posts)
 
-  //   }catch(err){
-  //     console.log(err, 'error in getAllPosts')
-  //   }
-  // }
+    }catch(err){
+      console.log(err, 'error in getAllPosts')
+    }
+  }
 
-  // useEffect(() => {
-  //   getAllPosts();
-  // }, [])
+  useEffect(() => {
+    getAllPosts();
+  }, [])
 
     return(
-        <span>
+        <>
         <SideBar user={user} handleLogout={handleLogout}/>    
         <Grid centered>
         <Grid.Row >
-          <Grid.Column style={{ maxWidth: 950 }}> 
+          <Grid.Column style={{ maxWidth: 750 }}> 
             <AddPostForm user={user} handleAddPost={handleAddPost}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column style={{ maxWidth: 700 }}>
-            <PostGallery posts={posts} user={user} />
+            {/* <PostGallery posts={posts} user={user} /> */}
           </Grid.Column>
         </Grid.Row>
         </Grid>
-        </span>
+        </>
     )
 }

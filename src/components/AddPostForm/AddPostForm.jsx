@@ -25,6 +25,7 @@ export default function AddPostForm({user, handleAddPost}){
 
 
     function handleSubmit(e) {
+        console.log(state)
         // Since we are sendinga file, prepare the object as formData to send to the server
         const formData = new FormData();
         formData.append('caption', state.caption)
@@ -45,7 +46,7 @@ export default function AddPostForm({user, handleAddPost}){
          ? user.photoUrl
          : "https://react.semantic-ui.com/images/wireframe/square-image.png"
         }
-        />
+        /> {user.username}
         </Segment>
         <Form.TextArea placeholder="What's happening?!"
         className="form-control"
