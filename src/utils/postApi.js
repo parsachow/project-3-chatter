@@ -11,14 +11,29 @@ export function create(data){
     method: 'POST',
     body: data,
     headers: {
-    Authorization: "Bearer " + tokenService.getToken() 
+      Authorization: "Bearer " + tokenService.getToken() 
     // new Headers({'Content-Type': 'application/json'}),
     // body: JSON.stringify(data)
     }
-    }).then(responseFromTheServer => {
+  }).then(responseFromTheServer => {
 		if(responseFromTheServer.ok) return responseFromTheServer.json() // so if everything went well in the response return 
 		//the parsed json to where we called the function
 
 		throw new Error('Something went wrong in create Post'); // this will go to the catch block when we call the function in the AddPostForm in handleSubmit function
+	})
+}
+
+export function getAllPosts(){
+  return fetch(BASE_URL, {
+		method: 'GET',
+	    headers: {
+			
+			Authorization: "Bearer " + tokenService.getToken()  
+		}	
+	}).then(responseFromTheServer => {
+		if(responseFromTheServer.ok) return responseFromTheServer.json() 
+
+		throw new Error('Something went wrong in getAllPosts, check the terminal!'); 
+	
 	})
 }

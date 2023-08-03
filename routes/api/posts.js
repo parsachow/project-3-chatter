@@ -8,9 +8,9 @@ const upload = multer();
 
 //http routes -> /api/posts
 //array of files -> upload.array('photo', 4)
-router.get('/', postsCtrl.index);
-router.get('/', upload.array('photo', 4), postsCtrl.create)
 
+router.get('/', upload.single('photo'), postsCtrl.create)
+router.get('/', postsCtrl.index);
 
 
 module.exports = router;

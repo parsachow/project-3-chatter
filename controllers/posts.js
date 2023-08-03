@@ -28,6 +28,7 @@ async function create(req, res) {
     const filePath = `chatter/posts/${uuidv4()}-${req.file.originalname}`;
     // create the object we want to send to aws
     const params = { Bucket: BUCKET_NAME, Key: filePath, Body: req.file.buffer };
+
     s3.upload(params, async function (err, data) {
       if (err) {
         console.log("===========================================");
@@ -38,6 +39,7 @@ async function create(req, res) {
         console.log("===========================================");
         res.status(400).json({ error: "Error from aws, check your terminal!" });
       }
+      
       try {
         // Use our Model to create a document in the posts collection in Mongodb
         const post = await Post.create({

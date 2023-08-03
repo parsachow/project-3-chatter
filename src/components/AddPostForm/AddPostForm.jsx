@@ -11,6 +11,7 @@ export default function AddPostForm({user, handleAddPost}){
 
 
     function handleFileInput(e){
+        //empty array here to upload multiple files?
         setSelectedFile(e.target.files[0])
     }
 
@@ -25,12 +26,12 @@ export default function AddPostForm({user, handleAddPost}){
 
     function handleSubmit(e) {
         // Since we are sendinga file, prepare the object as formData to send to the server
-        const formData = new FormData()
+        const formData = new FormData();
         formData.append('caption', state.caption)
         formData.append('photo', selectedFile)
         
         // call handleAddPost from HomePage, which calls our postsApi.create function in the utils folder
-        handleAddPost(formData)
+        handleAddPost(formData);//formData is the data we send to the server
     }
 
     return(

@@ -3,10 +3,17 @@ import { Card } from "semantic-ui-react"
 
 
 
-export default function PostGallery({user, posts}){
+export default function PostGallery({ posts, user }){
+
+    const postCards = posts.map((post) => {
+        return <PostCard post={post} key={post._id} user={user} />
+    })
+
+
     return(
-        <>
-        <h2>feed page where posts will be displayed</h2>
-        </>
+        
+        <Card.Group>
+            {postCards}
+        </Card.Group>
     )
 }

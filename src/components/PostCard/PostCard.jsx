@@ -3,7 +3,7 @@ import { Card, Image, Icon } from "semantic-ui-react"
 export default function PostCard({user, post}){
     return(
     <Card.Group>
-    <Card>
+    <Card key={post._id}>
       {/* <Description />
       <image /> */}
       <Card.Content>

@@ -15,22 +15,50 @@ export default function HomePage({user, handleLogout}){
   const [error, setError] = useState("");
 
 
+//we want to update state whenever we change a POST CRUD operations
   async function handleAddPost(data){
+
+    try{
+
+      const responseData = await postApi.create(data);
+      console.log(responseData, 'response from server in handleAddPost')
+      setPosts([responseData.data, ...posts]);
+
+    }catch(err){
+      console.log(err, 'error in handleAddPost in HomePage')
+      setError('error creating Post. Please try again.')
+    }
     
   }
+
+  // async function getAllPosts(){
+  //   try{
+  //     const responsefromServer = await postApi.getAllPosts();
+  //     // this is the getAllPosts function from post utils
+  //     console.log(responsefromServer);
+  //     setPosts(responsefromServer.posts)
+
+  //   }catch(err){
+  //     console.log(err, 'error in getAllPosts')
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getAllPosts();
+  // }, [])
 
     return(
         <span>
         <SideBar user={user} handleLogout={handleLogout}/>    
         <Grid centered>
         <Grid.Row >
-          <Grid.Column>
+          <Grid.Column style={{ maxWidth: 950 }}> 
             <AddPostForm user={user} handleAddPost={handleAddPost}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column>
-            <PostGallery />
+          <Grid.Column style={{ maxWidth: 700 }}>
+            <PostGallery posts={posts} user={user} />
           </Grid.Column>
         </Grid.Row>
         </Grid>
