@@ -23,6 +23,9 @@ export function create(data){
 	})
 }
 
+
+
+
 export function getAllPosts(){
   return fetch(BASE_URL, {
 		method: 'GET',

@@ -60,6 +60,7 @@ async function create(req, res) {
   else{
   try {
     // Use our Model to create a document in the posts collection in Mongodb
+    //post.createJustText???
     const post = await Post.create({
       caption: req.body.caption,
       user: req.user, // req.user is defined in config/auth if we the client sends over the jwt token

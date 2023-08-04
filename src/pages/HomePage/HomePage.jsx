@@ -3,6 +3,7 @@ import AddPostForm from "../../components/AddPostForm/AddPostForm"
 import PostGallery from "../../components/PostGallery/PostGallery"
 
 import * as postApi from "../../utils/postApi"
+import * as likeApi from "../../utils/likeApi"
 
 import { useState, useEffect } from "react"
 import { Grid, Segment } from "semantic-ui-react"
@@ -20,7 +21,7 @@ export default function HomePage({user, handleLogout}){
 
 //we want to update state whenever we change a POST CRUD operations
   async function handleAddPost(data){
-
+    
     try{
 
       const responseData = await postApi.create(data);
@@ -31,6 +32,7 @@ export default function HomePage({user, handleLogout}){
       console.log(err, 'error in handleAddPost in HomePage')
       setError('error creating Post. Please try again.')
     }
+  
     
   }
 
@@ -50,23 +52,51 @@ export default function HomePage({user, handleLogout}){
     getAllPosts();
   }, [])
 
+
+  async function addLike(postId){
+    try {
+      const response = await likeApi.createLike(postId)
+      // to update state we are just going to refetch the posts, because they will the updated
+      // likes
+      getAllPosts(); // updates state
+
+    } catch(err){
+      setError('error adding like')
+      console.log(err, ' error')
+    }
+  }
+
+  async function removeLike(likeId){
+    try {
+      const response = await likeApi.removeLike(likeId)
+      // to update state we are just going to refetch the posts, because they will the updated
+      // likes
+      getAllPosts(); //  updates state
+
+    } catch(err){
+      setError('error removing like')
+      console.log(err, ' error')
+    }
+  }
+
     return(
       
         <>
-        <SideBar user={user} handleLogout={handleLogout}/>    
-        <AddPostForm user={user} handleAddPost={handleAddPost}/>
+         <SideBar user={user} handleLogout={handleLogout}/>    
+
         <Grid centered>
         <Grid.Row >
-          <Grid.Column style={{ maxWidth: 750 }}> 
+          <Grid.Column style={{ maxWidth: 700 }}> 
           <AddPostForm user={user} handleAddPost={handleAddPost}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column style={{ maxWidth: 700 }}>
-             <PostGallery posts={posts} user={user} itemsPerRow={1}/>
+             <PostGallery posts={posts} user={user} itemsPerRow={1} addLike={addLike} removeLike={removeLike}/>
           </Grid.Column>
         </Grid.Row>
         </Grid> 
+
         </>
     )
 }
