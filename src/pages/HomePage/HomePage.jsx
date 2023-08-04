@@ -5,7 +5,7 @@ import PostGallery from "../../components/PostGallery/PostGallery"
 import * as postApi from "../../utils/postApi"
 
 import { useState, useEffect } from "react"
-import { Grid } from "semantic-ui-react"
+import { Grid, Segment } from "semantic-ui-react"
 
 export default function HomePage({user, handleLogout}){
 
@@ -50,6 +50,7 @@ export default function HomePage({user, handleLogout}){
     return(
         <>
         <SideBar user={user} handleLogout={handleLogout}/>    
+
         <Grid centered>
         <Grid.Row >
           <Grid.Column style={{ maxWidth: 750 }}> 
@@ -58,10 +59,10 @@ export default function HomePage({user, handleLogout}){
         </Grid.Row>
         <Grid.Row>
           <Grid.Column style={{ maxWidth: 700 }}>
-            {/* <PostGallery posts={posts} user={user} /> */}
+             <PostGallery posts={posts} user={user} itemsPerRow={1}/>
           </Grid.Column>
         </Grid.Row>
-        </Grid>
+        </Grid> 
         </>
     )
 }

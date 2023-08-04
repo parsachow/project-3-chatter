@@ -36,7 +36,7 @@ export default function AddPostForm({user, handleAddPost}){
     }
 
     return(
-    <Segment >
+    < >
         <Form autoComplete="off" onSubmit={handleSubmit}>
         <Segment>
         <Image
@@ -66,6 +66,6 @@ export default function AddPostForm({user, handleAddPost}){
         Post
         </Button>
         </Form>
-    </Segment>
+    </>
     )
 }

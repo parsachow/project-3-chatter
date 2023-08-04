@@ -4,7 +4,7 @@ export default function PostCard({user, post}){
     return(
     
       <Card centered key={post._id}>
-        <Card.Content>
+        <Card.Content textAlign="left">
           
             <Image
               floated='left'
@@ -24,12 +24,11 @@ export default function PostCard({user, post}){
           <Card.Description>
             {post.caption}
           </Card.Description>
-          <Image 
-          size="medium"
-          src={post.photoUrl} />
-            
         </Card.Content>
-      
+        <Image 
+          size="medium"
+          src={`${post.photoUrl}`} wrapped ui={false} />
+            
         <Card.Content extra textAlign={"right"}>
           <span>
           <Icon name="comments" size="large"/> reply
