@@ -7,6 +7,9 @@ import * as postApi from "../../utils/postApi"
 import { useState, useEffect } from "react"
 import { Grid, Segment } from "semantic-ui-react"
 
+
+
+
 export default function HomePage({user, handleLogout}){
 
 // The reasons we are setting posts state, is because then we can pass that data to the postgallery
@@ -48,13 +51,14 @@ export default function HomePage({user, handleLogout}){
   }, [])
 
     return(
+      
         <>
         <SideBar user={user} handleLogout={handleLogout}/>    
-
+        <AddPostForm user={user} handleAddPost={handleAddPost}/>
         <Grid centered>
         <Grid.Row >
           <Grid.Column style={{ maxWidth: 750 }}> 
-            <AddPostForm user={user} handleAddPost={handleAddPost}/>
+          <AddPostForm user={user} handleAddPost={handleAddPost}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
