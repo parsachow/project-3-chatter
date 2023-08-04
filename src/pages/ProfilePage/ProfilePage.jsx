@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 import userService from "../../utils/userService";
 import * as likeApi from "../../utils/likeApi"
+import { Segment } from "semantic-ui-react";
 
 
 export default function ProfilePage({ user, handleLogout }){
@@ -19,6 +20,15 @@ export default function ProfilePage({ user, handleLogout }){
     console.log(username);
 
     return(
-        <h1>Profile Page</h1>
+        <>
+        <SideBar user={user} handleLogout={handleLogout}/>
+        
+        <ProfileBio user={user}/>
+        
+        <h1>
+
+            Profile Page
+        </h1>
+        </>
     )
 }
