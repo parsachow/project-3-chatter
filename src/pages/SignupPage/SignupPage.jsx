@@ -23,7 +23,6 @@ export default function SignupPage({handleSignupLogin}){
         email: '',
         password: '',
         passwordConf: '',
-        bio: ''
     });
 
     const [error, setError] = useState('');
@@ -56,7 +55,7 @@ export default function SignupPage({handleSignupLogin}){
         formData.append('username', state.username);
         formData.append('email', state.email);
         formData.append('password', state.password);
-        formData.append('bio', state.bio);
+        
 
 
         try{
@@ -115,13 +114,6 @@ export default function SignupPage({handleSignupLogin}){
 					 value={state.passwordConf}
 					 onChange={handleChange}
 					 required
-				   />
-				   <Form.TextArea
-					 label="Bio"
-					 name="bio"
-					 placeholder="Tell us about yourself"
-					 value={state.bio}
-					 onChange={handleChange}
 				   />
 				   <Form.Field>
 					 <Form.Input

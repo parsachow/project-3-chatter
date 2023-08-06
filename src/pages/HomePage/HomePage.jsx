@@ -56,8 +56,8 @@ export default function HomePage({user, handleLogout}){
   async function addLike(postId){
     try {
       const response = await likeApi.createLike(postId)
-      // to update state we are just going to refetch the posts, because they will the updated
-      // likes
+      console.log(postId, 'this is from addLike')
+      // to update state we are just going to refetch the posts, because they will have the updated likes
       getAllPosts(); // updates state
 
     } catch(err){
