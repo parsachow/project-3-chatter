@@ -6,7 +6,7 @@ import * as postApi from "../../utils/postApi"
 import * as likeApi from "../../utils/likeApi"
 
 import { useState, useEffect } from "react"
-import { Grid, Segment } from "semantic-ui-react"
+import { Grid } from "semantic-ui-react"
 
 
 
@@ -67,8 +67,10 @@ export default function HomePage({user, handleLogout}){
   }
 
   async function removeLike(likeId){
+    console.log(likeId, "like ID")
     try {
-      const response = await likeApi.removeLike(likeId)
+      const response = await likeApi.removeLike(likeId);
+      console.log(likeId, "remove like");
       // to update state we are just going to refetch the posts, because they will the updated
       // likes
       getAllPosts(); //  updates state
@@ -92,7 +94,8 @@ export default function HomePage({user, handleLogout}){
         </Grid.Row>
         <Grid.Row>
           <Grid.Column style={{ maxWidth: 700 }}>
-             <PostGallery posts={posts} user={user} itemsPerRow={1} addLike={addLike} removeLike={removeLike}/>
+             <PostGallery posts={posts} user={user} itemsPerRow={1}
+             isProfile={false} addLike={addLike} removeLike={removeLike}/>
           </Grid.Column>
         </Grid.Row>
         </Grid> 

@@ -76,11 +76,12 @@ async function create(req, res) {
 
 
   async function index(req, res) {
+    console.log("index")
     try {
       // this populates the user when you find the posts
       // so we have access to the users information
       // when we fetch posts
-      const posts = await Post.find({}).populate("user").exec();
+      const posts = await Post.find({user: req.user._id}).populate("user").exec();
       res.status(200).json({ posts });
     } catch (err) {}
   }

@@ -19,13 +19,16 @@ async function create(req, res){
 }
 
 async function deleteLike(req, res){
-
+    console.log("deleteLike");
     try {
         
-        const post = await Post.findOne({'likes._id': req.params.id, 'likes.username': req.user.username});
-        post.likes.remove(req.params.id)
+        const post = await Post.findOne({
+            'likes._id': req.params.id, 
+            'likes.username': req.user.username})
+
+        post.likes.remove(req.params.id);
         // req.params.id is the like id 
-        await post.save() 
+        await post.save(); 
         res.json({data: 'like deleted'})
     } catch(err){
         res.status(400).json({err})

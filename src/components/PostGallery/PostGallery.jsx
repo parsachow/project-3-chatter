@@ -3,10 +3,10 @@ import { Card, Segment } from "semantic-ui-react"
 
 
 
-export default function PostGallery({ posts, user, addLike, removeLike }){
+export default function PostGallery({ posts, user, addLike, removeLike, isProfile }){
 
     const postCards = posts.map((post) => {
-        return <PostCard post={post} key={post._id} user={user} addLike={addLike} removeLike={removeLike}/>
+        return <PostCard post={post} key={post._id} isProfile={isProfile} user={user} addLike={addLike} removeLike={removeLike}/>
     })
 
 
