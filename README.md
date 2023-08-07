@@ -4,7 +4,7 @@ Description: A social media app similar to twitter where you
             can chat about what's happening in and around your life.
 
 Technologies: VS Code, MongoDB Atlas, Express, React, Node,
-              Heroku, Semantic
+               Semantic
 
 Getting Started: Trello Board - 
                  https://trello.com/b/qxMnZEtG/chatter
