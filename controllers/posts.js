@@ -8,9 +8,7 @@ const S3 = require("aws-sdk/clients/s3");
 // initialize the S3 constructor so we have an object to talk to aws
 const s3 = new S3();
 
-// since everyone has a unique bucket name,
-// its a good use case for a .env variable
-// because we don't share that outside our computer
+
 const BUCKET_NAME = process.env.BUCKET_NAME;
 
 module.exports = {
@@ -20,11 +18,9 @@ module.exports = {
 
 async function create(req, res) {
     console.log(req.body, req.file, " < req.body, req.file in posts/api create");
-    // check if there is a file, if there isn't send back an error
-    // if (!req.file) return res.status(400).json({ error: "Please Submit a Photo" });
+    //if there is a image file uploaded, then this block of code runs
     if (req.file) {
-    // this is the location of where our file will stored
-    // on aws s3
+    // this is the location of where our file will stored on aws s3
     const filePath = `chatter/posts/${uuidv4()}-${req.file.originalname}`;
     // create the object we want to send to aws
     const params = { Bucket: BUCKET_NAME, Key: filePath, Body: req.file.buffer };
@@ -44,11 +40,11 @@ async function create(req, res) {
         // Use our Model to create a document in the posts collection in Mongodb
         const post = await Post.create({
           caption: req.body.caption,
-          user: req.user, // req.user is defined in config/auth if we the client sends over the jwt token
+          user: req.user, // req.user is defined in config/auth. the client sends over the jwt token
           photoUrl: data.Location, // data.Location comes from the callback in the s3 upload
         });
         await post.populate("user"); // populating on a mongoose document! this gives us the user object
-        // this response will show up in the feedPage in   const responseData = await postsApi.create(post);
+        // this response will show up in the feedPage in const responseData = await postsApi.create(post);
         console.log('201 post', post )
         return res.status(201).json({ data: post }); // <- this is what responseData should be
       } catch (err) {
@@ -59,15 +55,12 @@ async function create(req, res) {
   }
   else{
   try {
-    // Use our Model to create a document in the posts collection in Mongodb
-    //post.createJustText???
+    
     const post = await Post.create({
       caption: req.body.caption,
-      user: req.user, // req.user is defined in config/auth if we the client sends over the jwt token
-      // data.Location comes from the callback in the s3 upload
+      user: req.user, 
     });
-    await post.populate("user"); // populating on a mongoose document! this gives us the user object
-    // this response will show up in the HomePage in  const responseData = await postsApi.create(post);
+    await post.populate("user"); 
     return res.status(201).json({ data: post }); // <- this is what responseData should be
   } catch (err) {
     return res.status(400).json({ error: err });
