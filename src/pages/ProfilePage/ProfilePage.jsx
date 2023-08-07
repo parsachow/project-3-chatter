@@ -18,7 +18,7 @@ export default function ProfilePage({ user, handleLogout }){
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("");
 
-    // grabbing the param from this route on App.jsx <Route path="/:username" element={<ProfilePage />} />
+    // getting the params from App.jsx <Route path="/:username" element={<ProfilePage />} />
     const { username } = useParams();
     console.log(username);
 

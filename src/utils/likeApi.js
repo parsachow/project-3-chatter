@@ -10,8 +10,7 @@ export function createLike(postId){
 		headers: {
 			// convention for sending jwts
 			
-			Authorization: "Bearer " + tokenService.getToken() // < this is how we get the token from localstorage and and it to our api request
-			// so the server knows who the request is coming from when the client is trying to make a POST
+			Authorization: "Bearer " + tokenService.getToken() 
 		}
 	}).then(res => res.json()); 
 }
@@ -22,8 +21,7 @@ export function removeLike(likeId){
 		headers: {
 			// convention for sending jwts
 			
-			Authorization: "Bearer " + tokenService.getToken() // < this is how we get the token from localstorage and and it to our api request
-			// so the server knows who the request is coming from when the client is trying to make a POST
+			Authorization: "Bearer " + tokenService.getToken() 
 		}
 	}).then(res => res.json());
 }

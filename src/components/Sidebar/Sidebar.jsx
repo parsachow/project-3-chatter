@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
     Grid,
     Icon,
-    Image,
     Menu,
     Sidebar,
   } from 'semantic-ui-react'
@@ -34,19 +33,19 @@ export default function SideBar({user, handleLogout}){
             <Menu.Item>
                 <Link>
                 <Icon name='bell' />
-                Notifications
+                  Notifications
                 </Link>
             </Menu.Item>
             <Menu.Item>
                 <Link>
                 <Icon name='mail' />
-                Messages
+                  Messages
                 </Link>
             </Menu.Item>
             <Menu.Item>
             <Link to="/login" onClick={handleLogout}>
               <Icon name='unlock' />
-              Logout
+                Logout
             </Link>
             </Menu.Item>
           </Sidebar>
