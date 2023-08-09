@@ -1,6 +1,6 @@
 import { Card, Image, Icon } from "semantic-ui-react"
 
-export default function PostCard({user, post, addLike, removeLike, isProfile}){
+export default function PostCard({ user, post, addLike, removeLike, isProfile }) {
   console.log(post)
   // Find out if the logged in user (user) is in the post.likes array
   const likedIndex = post.likes.findIndex(like => {
@@ -8,7 +8,7 @@ export default function PostCard({user, post, addLike, removeLike, isProfile}){
     return like.userId === user._id
 
   });
-  
+
   // if the user has liked the post, likedIndex is greater then -1 so the likeColor should be red
   const likeColor = likedIndex > -1 ? 'red' : 'grey';
 
@@ -17,49 +17,49 @@ export default function PostCard({user, post, addLike, removeLike, isProfile}){
 
   const handleLikesClick = likedIndex > -1 ? () => removeLike(post.likes[likedIndex]._id) : () => addLike(post._id)
 
-  
-    
-  
-    return(
-    
-      <Card centered key={post._id}>
-        {isProfile ? null : (
+
+
+
+  return (
+
+    <Card centered key={post._id}>
+      {isProfile ? null : (
         <Card.Content textAlign="left" >
-          
-            <Image
-              floated='left'
-              size='mini'
-              avatar
-              src={
-                user.photoUrl
+
+          <Image
+            floated='left'
+            size='mini'
+            avatar
+            src={
+              user.photoUrl
                 ? user.photoUrl
                 : "https://react.semantic-ui.com/images/wireframe/square-image.png"
-                }
-            />
-            <Card.Header floated='left'>{user.username}</Card.Header>
-            <Card.Content textAlign="right">
-            <Icon name="cancel"/>
-            </Card.Content>
+            }
+          />
+          <Card.Header floated='left'>{user.username}</Card.Header>
+          <Card.Content textAlign="right">
+            <Icon name="cancel" />
+          </Card.Content>
         </Card.Content>
-        )}
-        <Card.Content>
-          <Card.Description>
-            {post.caption}
-          </Card.Description>
-        </Card.Content>
-        {post.photoUrl ? <Image 
-          size="small"
-          src={`${post.photoUrl}`} wrapped ui={false} /> : null}
-        
-            
-        <Card.Content extra textAlign={"right"}>
-          <span>
-          <Icon name="comments" size="large"/> reply
-          <Icon name={"like"} size="large" color={likeColor} onClick={handleLikesClick } /> {post.likes.length} like
-        </span>
-        </Card.Content>
+      )}
+      <Card.Content>
+        <Card.Description>
+          {post.caption}
+        </Card.Description>
+      </Card.Content>
+      {post.photoUrl ? <Image
+        size="small"
+        src={`${post.photoUrl}`} wrapped ui={false} /> : null}
 
-      </Card>
-   
-    )
+
+      <Card.Content extra textAlign={"right"}>
+        <span>
+          <Icon name="comments" size="large" /> reply
+          <Icon name={"like"} size="large" color={likeColor} onClick={handleLikesClick} /> {post.likes.length} like
+        </span>
+      </Card.Content>
+
+    </Card>
+
+  )
 }

@@ -11,7 +11,7 @@ import * as likeApi from "../../utils/likeApi"
 
 
 
-export default function ProfilePage({ user, handleLogout }){
+export default function ProfilePage({ user, handleLogout }) {
 
     const [posts, setPosts] = useState([]);
     const [userState, setUserState] = useState({});
@@ -24,7 +24,7 @@ export default function ProfilePage({ user, handleLogout }){
 
     async function getProfile() {
 
-        try{
+        try {
             setLoading(true);
             const data = await userService.getProfile(username);
             console.log(data)
@@ -32,71 +32,71 @@ export default function ProfilePage({ user, handleLogout }){
             setUserState(data.user);
             setLoading(false)
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
             setError("Can't load/find Profile")
         }
     }
 
-    useEffect (() => {
+    useEffect(() => {
 
         getProfile();
 
     }, [username]);
 
 
-    async function addLike(postId){
+    async function addLike(postId) {
         try {
-          const response = await likeApi.createLike(postId)
-          console.log(postId, 'this is from addLike')
-          // to update state we are just going to refetch the posts, because they will have the updated likes
-          getProfile(); // updates state
-    
-        } catch(err){
-          setError('error adding like')
-          console.log(err, ' error')
+            const response = await likeApi.createLike(postId)
+            console.log(postId, 'this is from addLike')
+            // to update state we are just going to refetch the posts, because they will have the updated likes
+            getProfile(); // updates state
+
+        } catch (err) {
+            setError('error adding like')
+            console.log(err, ' error')
         }
     }
 
-    
-    async function removeLike(likeId){
+
+    async function removeLike(likeId) {
         console.log(likeId, "like ID")
         try {
-          const response = await likeApi.removeLike(likeId)
-          // to update state we are just going to refetch the posts, because they will the updated
-          // likes
-          getProfile(); //  updates state
-    
-        } catch(err){
-          setError('error removing like')
-          console.log(err, ' error')
+            const response = await likeApi.removeLike(likeId)
+            // to update state we are just going to refetch the posts, because they will the updated
+            // likes
+            getProfile(); //  updates state
+
+        } catch (err) {
+            setError('error removing like')
+            console.log(err, ' error')
         }
     }
 
     if (loading) {
-        return(
-            <> 
-            <SideBar user={user} handleLogout={handleLogout}/>
-            <Loader size='large' active inline='centered'>Loading</Loader>
+        return (
+            <>
+                <SideBar user={user} handleLogout={handleLogout} />
+                <Loader size='large' active inline='centered'>Loading</Loader>
             </>
         );
     }
 
-    return(
+    return (
         <>
-        <SideBar user={user} handleLogout={handleLogout}/>
-        <Grid>
-            <Grid.Row>
-                <Grid.Column>
-                    <ProfileBio user={userState}/>
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row centered>
-                <Grid.Column style={{ maxWidth: 750 }}>
-                        <PostGallery posts={posts} user={user} itemsPerRow={1} isProfile={true} addLike={addLike} removeLike={removeLike}/>
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>     
+            <SideBar user={user} handleLogout={handleLogout} />
+            <Grid>
+                <Grid.Row>
+                    <Grid.Column>
+                        <ProfileBio user={userState} />
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row centered>
+                    <Grid.Column style={{ maxWidth: 750 }}>
+                        <PostGallery posts={posts} user={user} itemsPerRow={1} isProfile={true} addLike={addLike} removeLike={removeLike} />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         </>
     )
 }
