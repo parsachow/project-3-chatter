@@ -16,6 +16,7 @@ const likesRoutes = require("./routes/api/likes")
 
 // add in when the app is ready to be deployed
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
+app.set('view engine', 'ejs');
 app.use(logger("dev"));
 app.use(express.json());
 
@@ -32,12 +33,17 @@ app.use("/api", likesRoutes);
 
 
 // "catch all" route
+const manifest = require('./dist/manifest.json');
+
+app.use(express.static(path.join(__dirname, "dist")));
+
+// "catch all" route
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.render(path.join(__dirname, 'dist', 'index.ejs'), {manifest});
 });
 
 
-const port = process.env.PORT || 3001;
+// const port = process.env.PORT || 3001;
 
 
 
