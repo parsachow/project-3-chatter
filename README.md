@@ -1,17 +1,19 @@
-App Title: Chatter 
+# Chatter 
 
-Description: A social media app similar to twitter where you 
-            can chat about what's happening in and around your life.
+A social media app similar to twitter where you can chat about what's happening in and around your life.
 
-Technologies: VS Code, MongoDB Atlas, Express, React, Node, AWS
-               Semantic
+## Technologies: 
+VS Code, MongoDB Atlas, Express, React, Node, AWS, Semantic
 
-Getting Started: Trello Board - 
-                 https://trello.com/b/qxMnZEtG/chatter
+## Screenshots: 
+![Signup Page](https://i.imgur.com/ENquWRb.png)
+![Home Page](https://i.imgur.com/3Idnryb.png)
+![Profile Page](https://i.imgur.com/ybNf6V7.png)
 
-                 App - 
+## Getting Started: 
+**Deployed App**: [Here](https://chatter-app-9lho.onrender.com/login)
+**Trello Board**: [Here](https://trello.com/b/qxMnZEtG/chatter)
 
-Screenshots: https://imgur.com/a/U6XFVJJ
 
-Next Steps: Integrate comments, message and notification 
-            features as well as being able to delete a post. 
+## Next Steps: 
+Integrate comments, message and notification features as well as deleting posts. 
